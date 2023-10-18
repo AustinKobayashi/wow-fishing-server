@@ -16,6 +16,9 @@ def click_handler():
         if 'click' not in request.json:
             return 'Error', 400
 
+        if request.json['click'] < 700 or request.json['click'] > 1500:
+            return 'Error', 400
+        
         pi.set_servo_pulsewidth(SERVO_PIN, request.json['click'])
 
         return 'Success', 200
