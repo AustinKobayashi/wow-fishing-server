@@ -33,4 +33,5 @@ def click_handler():
         return 'Error', 500  # Internal Server Error
 
 if __name__ == '__main__':
+    pi.set_servo_pulsewidth(SERVO_PIN, 0)
     app.run(host='0.0.0.0', port=5000, debug=False)
