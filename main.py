@@ -18,7 +18,7 @@ def click_handler():
             pi.set_servo_pulsewidth(SERVO_PIN, 0)
             return 'Error', 400
 
-        if request.json['click'] < 700 or request.json['click'] > 1500:
+        if request.json['click'] < 900 or request.json['click'] > 2100:
             pi.set_servo_pulsewidth(SERVO_PIN, 0)
             return 'Error', 400
         
