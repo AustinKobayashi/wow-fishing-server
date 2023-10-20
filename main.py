@@ -1,3 +1,4 @@
+import time
 import pigpio
 from flask import Flask, request
 
@@ -14,13 +15,18 @@ app = Flask(__name__)
 def click_handler():
     try:
         if 'click' not in request.json:
+            pi.set_servo_pulsewidth(SERVO_PIN, 0)
             return 'Error', 400
 
         if request.json['click'] < 700 or request.json['click'] > 1500:
+            pi.set_servo_pulsewidth(SERVO_PIN, 0)
             return 'Error', 400
         
         pi.set_servo_pulsewidth(SERVO_PIN, request.json['click'])
 
+        time.sleep(SERVO_SPEED)
+
+        pi.set_servo_pulsewidth(SERVO_PIN, 0)
         return 'Success', 200
     except Exception as e:
         print(f'Error handling POST request: {e}')
